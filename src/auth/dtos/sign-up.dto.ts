@@ -12,22 +12,22 @@ export class SignupDto {
   @ApiProperty({ description: 'Nome do usuário' })
   @IsString()
   @IsNotEmpty()
-  name: string;
+  readonly name: string;
 
   @ApiProperty({ description: 'Email do usuário' })
   @IsEmail()
   @IsNotEmpty()
-  email: string;
+  readonly email: string;
 
   @IsNotEmpty()
   @IsString()
   @MinLength(6)
-  password: string;
+  readonly password: string;
 
   @ApiProperty({
     description: 'Definir se usuario é administrador do usuário',
     default: false,
   })
   @IsBoolean()
-  admin: boolean;
+  readonly admin: boolean;
 }

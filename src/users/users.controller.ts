@@ -12,8 +12,8 @@ import {
 import { UsersService } from './users.service';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { ApiForbiddenResponse, ApiResponse, ApiTags } from '@nestjs/swagger';
-import { SignupDto } from './dto/sign-up.dto';
-import { SigninDto } from './dto/sign-in.dto';
+import { SignupDto } from '../auth/dtos/sign-up.dto';
+import { SigninDto } from '../auth/dtos/sign-in.dto';
 import { AuthResponse } from '@/auth/models/jwt-payload.model';
 
 @ApiTags('Users')

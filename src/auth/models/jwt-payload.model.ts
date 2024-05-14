@@ -4,6 +4,6 @@ export interface JwtPayload {
 
 export interface AuthResponse {
   name: string;
-  accessToken: string;
   email: string;
+  accessToken: string;
 }

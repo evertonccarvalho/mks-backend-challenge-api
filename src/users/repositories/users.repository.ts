@@ -4,9 +4,9 @@ import { Repository } from 'typeorm';
 import { UpdateUserDto } from '../dto/update-user.dto';
 import { UserEntity } from '../entities/user.entity';
 import { NotFoundException } from '@nestjs/common';
-import { SigninDto } from '../dto/sign-in.dto';
+import { SigninDto } from '../../auth/dtos/sign-in.dto';
 import { AuthService } from '@/auth/auth.service';
-import { SignupDto } from '@/users/dto/sign-up.dto';
+import { SignupDto } from '@/auth/dtos/sign-up.dto';
 import { AuthResponse } from '@/auth/models/jwt-payload.model';
 import { encrypt } from '@/application/encrypter/encrypter';
 import { EmailIsTakenError } from '../errors';
@@ -40,13 +40,13 @@ export class UsersRepository {
     return { name: savedUser.name, email: savedUser.email, accessToken };
   }
 
-  public async signIn(
-    signinDto: SigninDto,
-  ): Promise<{ name: string; accessToken: string; email: string }> {
+  public async signIn(signinDto: SigninDto): Promise<AuthResponse> {
     const user = await this.findByEmail(signinDto.email);
+
     if (!user) {
       throw new NotFoundException('Usuário não encontrado');
     }
+
     const match = await user.comparePassword(signinDto.password);
     if (!match) {
       throw new NotFoundException('Credenciais inválidas');

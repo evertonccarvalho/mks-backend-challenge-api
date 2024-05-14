@@ -2,8 +2,8 @@ import { Injectable } from '@nestjs/common';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { UsersRepository } from './repositories/users.repository';
 import { UserEntity } from './entities/user.entity';
-import { SigninDto } from './dto/sign-in.dto';
-import { SignupDto } from './dto/sign-up.dto';
+import { SigninDto } from '../auth/dtos/sign-in.dto';
+import { SignupDto } from '../auth/dtos/sign-up.dto';
 import { AuthResponse } from '@/auth/models/jwt-payload.model';
 
 @Injectable()
