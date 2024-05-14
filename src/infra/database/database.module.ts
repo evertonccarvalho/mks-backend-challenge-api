@@ -1,3 +1,4 @@
+import { UserEntity } from '@/users/entities/user.entity';
 import { Module } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
@@ -13,7 +14,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
           username: configSerice.get('DB_USER'),
           password: configSerice.get('DB_PASS'),
           database: configSerice.get('DB_NAME'),
-          entities: [],
+          entities: [UserEntity],
           synchronize: true,
         };
       },
