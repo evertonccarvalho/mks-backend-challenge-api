@@ -1,8 +1,4 @@
-import {
-  BadRequestException,
-  Injectable,
-  UnauthorizedException,
-} from '@nestjs/common';
+import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { NotFoundException } from '@nestjs/common';
@@ -81,26 +77,6 @@ export class AuthRepository {
       throw new UnauthorizedException('User not found.');
     }
     return user;
-  }
-
-  private static jwtExtractor(request: {
-    headers: { [key: string]: string };
-  }): string {
-    const authHeader = request.headers.authorization;
-
-    if (!authHeader) {
-      throw new BadRequestException('Bad request.');
-    }
-
-    const [, token] = authHeader.split(' ');
-
-    return token;
-  }
-
-  returnJwtExtractor(): (request: {
-    headers: { [key: string]: string };
-  }) => string {
-    return AuthRepository.jwtExtractor;
   }
 
   private async findByEmail(email: string): Promise<UserEntity> {

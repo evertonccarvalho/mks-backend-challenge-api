@@ -19,7 +19,4 @@ export class AuthService {
   async validateUser(jwtPayload: JwtPayload): Promise<UserEntity> {
     return this.authRepository.validateUser(jwtPayload);
   }
-  async returnJwtExtractor() {
-    return this.authRepository.returnJwtExtractor();
-  }
 }
