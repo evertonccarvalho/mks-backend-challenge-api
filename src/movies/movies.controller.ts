@@ -10,7 +10,7 @@ import {
   UseInterceptors,
 } from '@nestjs/common';
 import { MoviesService } from './movies.service';
-import { UpdateMovieDto } from './dto/update-movie.dto';
+import { UpdateMovieDto } from '../infra/http/dto/update-movie.dto';
 import {
   ApiBearerAuth,
   ApiForbiddenResponse,
@@ -18,7 +18,7 @@ import {
   ApiTags,
 } from '@nestjs/swagger';
 import { JwtAuthGuard } from '@/auth/jwt-auth.guard';
-import { CreateMovieDto } from './dto/create-movie.dto';
+import { CreateMovieDto } from '../infra/http/dto/create-movie.dto';
 import { CacheInterceptor, CacheKey } from '@nestjs/cache-manager';
 
 @ApiTags('Movies')

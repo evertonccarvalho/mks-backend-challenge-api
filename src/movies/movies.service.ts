@@ -1,10 +1,14 @@
 import { Injectable } from '@nestjs/common';
-import { MoviesRepository } from './repositories/movies.repository';
-import { CreateMovieDto, MovieListDto, UpdateMovieDto } from './dto';
+import { MoviesRepositoryMVC } from './repositories/movies.repository';
+import {
+  CreateMovieDto,
+  MovieListDto,
+  UpdateMovieDto,
+} from '../infra/http/dto';
 
 @Injectable()
 export class MoviesService {
-  constructor(private readonly movieRepository: MoviesRepository) {}
+  constructor(private readonly movieRepository: MoviesRepositoryMVC) {}
 
   async create(createMovieDto: CreateMovieDto) {
     return this.movieRepository.create(createMovieDto);
