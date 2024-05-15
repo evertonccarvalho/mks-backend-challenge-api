@@ -80,7 +80,6 @@ export class AuthRepository {
   }
 
   private async findByEmail(email: string): Promise<UserEntity> {
-    console.log(email);
     const user = await this.userRepository.findOne({ where: { email } });
     if (!user) {
       throw new NotFoundException('Email not found');

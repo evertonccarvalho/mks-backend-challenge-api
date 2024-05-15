@@ -27,6 +27,7 @@ export class UsersController {
   @ApiResponse({ status: 404, description: 'Não encontrado' })
   @ApiForbiddenResponse({ description: 'Acesso negado' })
   @Get(':id')
+  @UseGuards(JwtAuthGuard)
   findOne(@Param('id') id: string) {
     return this.usersService.findOne(id);
   }
@@ -34,6 +35,7 @@ export class UsersController {
   @ApiResponse({ status: 404, description: 'Não encontrado' })
   @ApiForbiddenResponse({ description: 'Acesso negado' })
   @Put(':id')
+  @UseGuards(JwtAuthGuard)
   update(@Param('id') id: string, @Body() updateUserDto: UpdateUserDto) {
     return this.usersService.update(id, updateUserDto);
   }
@@ -41,6 +43,7 @@ export class UsersController {
   @ApiResponse({ status: 404, description: 'Não encontrado' })
   @ApiForbiddenResponse({ description: 'Acesso negado' })
   @Delete(':id')
+  @UseGuards(JwtAuthGuard)
   remove(@Param('id') id: string) {
     return this.usersService.remove(id);
   }
