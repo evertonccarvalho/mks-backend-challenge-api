@@ -9,6 +9,12 @@ export class MovieListDto {
   @ApiProperty({ description: 'Título do filme' })
   title: string;
 
+  @ApiProperty({ description: 'Título do filme' })
+  synopsis: string;
+
+  @ApiProperty({ description: 'Título do filme' })
+  duration: number;
+
   @ApiProperty({ description: 'Nome do diretor do filme' })
   director: string;
 

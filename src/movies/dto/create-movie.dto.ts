@@ -7,6 +7,14 @@ export class CreateMovieDto {
 
   @IsNotEmpty()
   @IsString()
+  synopsis: string;
+
+  @IsNotEmpty()
+  @IsString()
+  duration: number;
+
+  @IsNotEmpty()
+  @IsString()
   director: string;
 
   @IsNotEmpty()

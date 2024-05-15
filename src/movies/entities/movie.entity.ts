@@ -10,6 +10,12 @@ export class MovieEntity {
   title: string;
 
   @Column()
+  synopsis: string;
+
+  @Column()
+  duration: number;
+
+  @Column()
   director: string;
 
   @Column({ type: 'int', default: 0 })
