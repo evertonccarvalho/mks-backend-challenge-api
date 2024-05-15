@@ -1,18 +1,18 @@
 version: '3.1'
 
 services:
-  app:
-    build: .
-    entrypoint: .docker/entrypoint.sh
-    container_name: mks-api
-    ports:
-      - '3000:3000'
-    volumes:
-      - .:/home/node/app
-    depends_on:
-      - db
-    links:
-      - redis
+  # app:
+  #   build: .
+  #   entrypoint: .docker/entrypoint.sh
+  #   container_name: mks-api
+  #   ports:
+  #     - '3000:3000'
+  #   volumes:
+  #     - .:/home/node/app
+  #   depends_on:
+  #     - db
+  #   links:
+  #     - redis
 
   db:
     build: .

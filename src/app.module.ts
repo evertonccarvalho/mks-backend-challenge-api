@@ -1,13 +1,11 @@
 import { Module } from '@nestjs/common';
 import { DatabaseModule } from '@/infra/database/database.module';
 import { ConfigModule } from '@nestjs/config';
-import { AppService } from './app.service';
-import { AppController } from './app.controller';
 import { UsersModule } from './users/users.module';
 import { AuthModule } from './auth/auth.module';
 import { MoviesModule } from './movies/movies.module';
 import { CacheModule } from '@nestjs/cache-manager';
-
+import { redisStore } from 'cache-manager-ioredis-yet';
 @Module({
   imports: [
     ConfigModule.forRoot({ isGlobal: true }),
@@ -17,9 +15,17 @@ import { CacheModule } from '@nestjs/cache-manager';
     MoviesModule,
     CacheModule.register({
       isGlobal: true,
+      useFactory: async () => {
+        const store = await redisStore({
+          ttl: 30,
+          host: process.env.REDIS_HOST,
+          port: Number(process.env.REDIS_PORT),
+        });
+        return { store };
+      },
     }),
   ],
-  controllers: [AppController],
-  providers: [AppService],
+  controllers: [],
+  providers: [],
 })
 export class AppModule {}

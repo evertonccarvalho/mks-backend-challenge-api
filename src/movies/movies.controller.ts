@@ -7,14 +7,22 @@ import {
   Put,
   UseGuards,
   Post,
+  UseInterceptors,
 } from '@nestjs/common';
 import { MoviesService } from './movies.service';
 import { UpdateMovieDto } from './dto/update-movie.dto';
-import { ApiForbiddenResponse, ApiResponse, ApiTags } from '@nestjs/swagger';
+import {
+  ApiBearerAuth,
+  ApiForbiddenResponse,
+  ApiResponse,
+  ApiTags,
+} from '@nestjs/swagger';
 import { JwtAuthGuard } from '@/auth/jwt-auth.guard';
 import { CreateMovieDto } from './dto/create-movie.dto';
+import { CacheInterceptor, CacheKey } from '@nestjs/cache-manager';
 
 @ApiTags('Movies')
+@ApiBearerAuth()
 @Controller('movies')
 export class MoviesController {
   constructor(private readonly moviesService: MoviesService) {}
@@ -27,6 +35,8 @@ export class MoviesController {
   }
 
   @ApiForbiddenResponse({ description: 'Acesso negado' })
+  @UseInterceptors(CacheInterceptor)
+  @CacheKey('movies')
   @Get()
   findAll() {
     return this.moviesService.findAll();
