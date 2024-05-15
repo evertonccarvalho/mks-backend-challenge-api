@@ -1,51 +1,25 @@
-import {
-  BadRequestException,
-  Injectable,
-  UnauthorizedException,
-} from '@nestjs/common';
-import { sign } from 'jsonwebtoken';
-import { Request } from 'express';
-import { Repository } from 'typeorm';
+import { Injectable } from '@nestjs/common';
+
+import { AuthenticatedUser, JwtPayload } from './interfaces';
+import { SigninDto, SignupDto } from './dtos';
+import { AuthRepository } from './repositories/auth.repository';
 import { UserEntity } from '@/users/entities/user.entity';
-import { InjectRepository } from '@nestjs/typeorm';
-import { JwtPayload } from './interfaces';
 @Injectable()
 export class AuthService {
-  constructor(
-    @InjectRepository(UserEntity)
-    private readonly userRepository: Repository<UserEntity>,
-  ) {}
+  constructor(private readonly authRepository: AuthRepository) {}
 
-  public async createAccessToken(userId: string): Promise<string> {
-    return sign({ userId }, process.env.JWT_SECRET, {
-      expiresIn: process.env.JWT_EXPIRATION,
-    });
+  async signIn(signinDto: SigninDto): Promise<AuthenticatedUser> {
+    return this.authRepository.signIn(signinDto);
   }
 
-  public async validateUser(jwtPayload: JwtPayload): Promise<UserEntity> {
-    const user = await this.userRepository.findOne({
-      where: { id: jwtPayload.userId },
-    });
-
-    if (!user) {
-      throw new UnauthorizedException('User not found.');
-    }
-    return user;
+  async signUp(signupDto: SignupDto): Promise<AuthenticatedUser> {
+    return this.authRepository.signUp(signupDto);
   }
 
-  private static jwtExtractor(request: Request): string {
-    const authHeader = request.headers.authorization;
-
-    if (!authHeader) {
-      throw new BadRequestException('Bad request.');
-    }
-
-    const [, token] = authHeader.split(' ');
-
-    return token;
+  async validateUser(jwtPayload: JwtPayload): Promise<UserEntity> {
+    return this.authRepository.validateUser(jwtPayload);
   }
-
-  public returnJwtExtractor(): (request: Request) => string {
-    return AuthService.jwtExtractor;
+  async returnJwtExtractor() {
+    return this.authRepository.returnJwtExtractor();
   }
 }

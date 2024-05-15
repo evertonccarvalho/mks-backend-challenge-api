@@ -1,38 +1,25 @@
-import {
-  Controller,
-  Get,
-  Post,
-  Body,
-  Patch,
-  Param,
-  Delete,
-  HttpCode,
-  HttpStatus,
-} from '@nestjs/common';
+import { Controller, Get, Body, Patch, Param, Delete } from '@nestjs/common';
 import { UsersService } from './users.service';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { ApiForbiddenResponse, ApiResponse, ApiTags } from '@nestjs/swagger';
-import { SignupDto } from '../auth/dtos/sign-up.dto';
-import { SigninDto } from '../auth/dtos/sign-in.dto';
-import { AuthenticatedUser } from '@/auth/interfaces';
 
 @ApiTags('Users')
 @Controller('users')
 export class UsersController {
   constructor(private readonly usersService: UsersService) {}
 
-  @Post('signup')
-  @HttpCode(HttpStatus.CREATED)
-  @ApiResponse({ status: 409, description: 'Conflito de email' })
-  signUp(@Body() signUpDto: SignupDto): Promise<AuthenticatedUser> {
-    return this.usersService.signUp(signUpDto);
-  }
+  // @Post('signup')
+  // @HttpCode(HttpStatus.CREATED)
+  // @ApiResponse({ status: 409, description: 'Conflito de email' })
+  // signUp(@Body() signUpDto: SignupDto): Promise<AuthenticatedUser> {
+  //   return this.usersService.signUp(signUpDto);
+  // }
 
-  @Post('signin')
-  @HttpCode(HttpStatus.OK)
-  signIn(@Body() signInDto: SigninDto): Promise<AuthenticatedUser> {
-    return this.usersService.signIn(signInDto);
-  }
+  // @Post('signin')
+  // @HttpCode(HttpStatus.OK)
+  // signIn(@Body() signInDto: SigninDto): Promise<AuthenticatedUser> {
+  //   return this.usersService.signIn(signInDto);
+  // }
 
   @ApiForbiddenResponse({ description: 'Acesso negado' })
   @Get()

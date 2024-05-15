@@ -4,12 +4,7 @@ import { Repository } from 'typeorm';
 import { UpdateUserDto } from '../dto/update-user.dto';
 import { UserEntity } from '../entities/user.entity';
 import { NotFoundException } from '@nestjs/common';
-import { SigninDto } from '../../auth/dtos/sign-in.dto';
-import { AuthService } from '@/auth/auth.service';
-import { SignupDto } from '@/auth/dtos/sign-up.dto';
-import { encrypt } from '@/application/encrypter/encrypter';
-import { EmailIsTakenError } from '../errors';
-import { AuthenticatedUser } from '@/auth/interfaces';
+
 import { UserListDto } from '../dto/user-list.dto.ts';
 
 @Injectable()
@@ -17,48 +12,48 @@ export class UsersRepository {
   constructor(
     @InjectRepository(UserEntity)
     private readonly userRepository: Repository<UserEntity>,
-    private readonly authService: AuthService,
+    // private readonly authService: AuthService,
   ) {}
 
-  async signUp(signupDto: SignupDto): Promise<AuthenticatedUser> {
-    const existingUser = await this.findByEmail(signupDto.email);
+  // async signUp(signupDto: SignupDto): Promise<AuthenticatedUser> {
+  //   const existingUser = await this.findByEmail(signupDto.email);
 
-    if (existingUser) {
-      throw new EmailIsTakenError();
-    }
+  //   if (existingUser) {
+  //     throw new EmailIsTakenError();
+  //   }
 
-    const newUser = this.userRepository.create({
-      ...signupDto,
-      password: await encrypt(signupDto.password),
-    });
+  //   const newUser = this.userRepository.create({
+  //     ...signupDto,
+  //     password: await encrypt(signupDto.password),
+  //   });
 
-    const savedUser = await this.userRepository.save(newUser);
+  //   const savedUser = await this.userRepository.save(newUser);
 
-    const accessToken = await this.authService.createAccessToken(savedUser.id);
+  //   const accessToken = await this.authService.createAccessToken(savedUser.id);
 
-    return {
-      id: savedUser.id,
-      name: savedUser.name,
-      email: savedUser.email,
-      accessToken,
-    };
-  }
+  //   return {
+  //     id: savedUser.id,
+  //     name: savedUser.name,
+  //     email: savedUser.email,
+  //     accessToken,
+  //   };
+  // }
 
-  async signIn(signinDto: SigninDto): Promise<AuthenticatedUser> {
-    const user = await this.findByEmail(signinDto.email);
+  // async signIn(signinDto: SigninDto): Promise<AuthenticatedUser> {
+  //   const user = await this.findByEmail(signinDto.email);
 
-    if (!user) {
-      throw new NotFoundException('User not found');
-    }
+  //   if (!user) {
+  //     throw new NotFoundException('User not found');
+  //   }
 
-    const match = await user.comparePassword(signinDto.password);
-    if (!match) {
-      throw new NotFoundException('Invalid credentials');
-    }
-    const accessToken = await this.authService.createAccessToken(user.id);
+  //   const match = await user.comparePassword(signinDto.password);
+  //   if (!match) {
+  //     throw new NotFoundException('Invalid credentials');
+  //   }
+  //   const accessToken = await this.authService.createAccessToken(user.id);
 
-    return { id: user.id, name: user.name, accessToken, email: user.email };
-  }
+  //   return { id: user.id, name: user.name, accessToken, email: user.email };
+  // }
 
   async findAll(): Promise<UserListDto[]> {
     const users = await this.userRepository.find();
