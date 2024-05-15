@@ -17,7 +17,6 @@ import { AuthController } from './auth.controller';
     }),
   ],
   controllers: [AuthController],
-
   providers: [AuthService, AuthRepository, JwtStrategy, JwtService],
   exports: [AuthService],
 })

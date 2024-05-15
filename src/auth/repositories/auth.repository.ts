@@ -8,7 +8,7 @@ import { encrypt } from '@/application/encrypter/encrypter';
 import { AuthenticatedUser } from '@/auth/interfaces';
 import { UserEntity } from '@/users/entities/user.entity';
 import { EmailIsTakenError } from '@/users/errors';
-import { JwtService } from '@nestjs/jwt'; // Importe JwtService
+import { JwtService } from '@nestjs/jwt';
 import { JwtPayload } from 'jsonwebtoken';
 
 @Injectable()

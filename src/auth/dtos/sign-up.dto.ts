@@ -1,11 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
-import {
-  IsBoolean,
-  IsEmail,
-  IsNotEmpty,
-  IsString,
-  MinLength,
-} from 'class-validator';
+import { IsEmail, IsNotEmpty, IsString, MinLength } from 'class-validator';
 
 // create-user-dto
 export class SignupDto {
@@ -23,11 +17,4 @@ export class SignupDto {
   @IsString()
   @MinLength(6)
   readonly password: string;
-
-  @ApiProperty({
-    description: 'Definir se usuario é administrador do usuário',
-    default: false,
-  })
-  @IsBoolean()
-  readonly admin: boolean;
 }

@@ -13,8 +13,11 @@ export class UserEntity {
   @Column({ unique: true })
   email: string;
 
+  @Column()
+  password: string;
+
   @Column({ nullable: true })
-  phoneNumber: string;
+  phoneNumber: string | null;
 
   @Column({ default: true })
   isActive: boolean;
@@ -31,9 +34,6 @@ export class UserEntity {
     onUpdate: 'CURRENT_TIMESTAMP',
   })
   updatedAt: Date;
-
-  @Column()
-  password: string;
 
   @BeforeInsert()
   generetedId() {
