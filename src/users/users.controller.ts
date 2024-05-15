@@ -14,7 +14,7 @@ import { UpdateUserDto } from './dto/update-user.dto';
 import { ApiForbiddenResponse, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { SignupDto } from '../auth/dtos/sign-up.dto';
 import { SigninDto } from '../auth/dtos/sign-in.dto';
-import { AuthResponse } from '@/auth/models/jwt-payload.model';
+import { AuthenticatedUser } from '@/auth/interfaces';
 
 @ApiTags('Users')
 @Controller('users')
@@ -24,15 +24,13 @@ export class UsersController {
   @Post('signup')
   @HttpCode(HttpStatus.CREATED)
   @ApiResponse({ status: 409, description: 'Conflito de email' })
-  signUp(@Body() signUpDto: SignupDto): Promise<AuthResponse> {
-    console.log(signUpDto);
+  signUp(@Body() signUpDto: SignupDto): Promise<AuthenticatedUser> {
     return this.usersService.signUp(signUpDto);
   }
 
   @Post('signin')
   @HttpCode(HttpStatus.OK)
-  signIn(@Body() signInDto: SigninDto): Promise<AuthResponse> {
-    console.log(signInDto);
+  signIn(@Body() signInDto: SigninDto): Promise<AuthenticatedUser> {
     return this.usersService.signIn(signInDto);
   }
 

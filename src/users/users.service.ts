@@ -1,28 +1,28 @@
 import { Injectable } from '@nestjs/common';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { UsersRepository } from './repositories/users.repository';
-import { UserEntity } from './entities/user.entity';
 import { SigninDto } from '../auth/dtos/sign-in.dto';
 import { SignupDto } from '../auth/dtos/sign-up.dto';
-import { AuthResponse } from '@/auth/models/jwt-payload.model';
+import { UserListDto } from './dto/user-list.dto.ts';
+import { AuthenticatedUser } from '@/auth/interfaces';
 
 @Injectable()
 export class UsersService {
   constructor(private readonly userRepository: UsersRepository) {}
 
-  async signIn(signinDto: SigninDto): Promise<AuthResponse> {
+  async signIn(signinDto: SigninDto): Promise<AuthenticatedUser> {
     return this.userRepository.signIn(signinDto);
   }
 
-  async signUp(signupDto: SignupDto): Promise<AuthResponse> {
+  async signUp(signupDto: SignupDto): Promise<AuthenticatedUser> {
     return this.userRepository.signUp(signupDto);
   }
 
-  async findAll(): Promise<UserEntity[]> {
+  async findAll(): Promise<UserListDto[]> {
     return this.userRepository.findAll();
   }
 
-  async findOne(id: string): Promise<UserEntity> {
+  async findOne(id: string): Promise<UserListDto> {
     return this.userRepository.findOne(id);
   }
 
@@ -30,7 +30,7 @@ export class UsersService {
     return this.userRepository.update(id, updateUserDto);
   }
 
-  async remove(id: string) {
+  async remove(id: string): Promise<void> {
     return this.userRepository.remove(id);
   }
 }
