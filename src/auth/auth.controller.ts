@@ -4,7 +4,7 @@ import { SignupDto } from '../auth/dtos/sign-up.dto';
 import { SigninDto } from '../auth/dtos/sign-in.dto';
 import { AuthenticatedUser } from '@/auth/interfaces';
 import { AuthService } from './auth.service';
-import { Public } from './decorators/authGuard.decoratos';
+import { Public } from './decorators/auth-guard.decorators';
 
 @ApiTags('Auth')
 @Controller('auth')

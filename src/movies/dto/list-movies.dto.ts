@@ -24,6 +24,8 @@ export class MovieListDto {
   constructor(movie: MovieEntity) {
     this.id = movie.id;
     this.title = movie.title;
+    this.synopsis = movie.synopsis;
+    this.duration = movie.duration;
     this.director = movie.director;
     this.year = movie.year;
   }

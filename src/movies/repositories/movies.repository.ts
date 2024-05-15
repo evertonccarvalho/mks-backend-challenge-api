@@ -1,12 +1,11 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import { NotFoundException } from '@nestjs/common';
-
 import { MovieEntity } from '../entities/movie.entity';
-import { MovieListDto } from '../dto/movies-list.dto.ts';
+import { MovieListDto } from '../dto/list-movies.dto';
 import { UpdateMovieDto } from '../dto/update-movie.dto';
 import { CreateMovieDto } from '../dto/create-movie.dto';
+import { NotFoundError } from '@/application/errors/not-found-error';
 
 @Injectable()
 export class MoviesRepository {
@@ -15,9 +14,9 @@ export class MoviesRepository {
     private readonly movieRepository: Repository<MovieEntity>,
   ) {}
 
-  async create(createMovieDto: CreateMovieDto): Promise<CreateMovieDto> {
-    const movie = await this.movieRepository.save(createMovieDto);
-    return movie;
+  async create(createMovieDto: CreateMovieDto): Promise<MovieListDto> {
+    const newMovie = await this.movieRepository.save(createMovieDto);
+    return new MovieListDto(newMovie);
   }
 
   async findAll(): Promise<MovieListDto[]> {
@@ -28,7 +27,7 @@ export class MoviesRepository {
   async findOne(id: string): Promise<MovieListDto> {
     const movie = await this.movieRepository.findOne({ where: { id: id } });
     if (!movie) {
-      throw new NotFoundException('Movie not found');
+      throw new NotFoundError('Movie not found');
     }
     return new MovieListDto(movie);
   }
@@ -36,22 +35,24 @@ export class MoviesRepository {
   async update(
     id: string,
     updateMovieDto: UpdateMovieDto,
-  ): Promise<UpdateMovieDto> {
+  ): Promise<MovieListDto> {
     const movie = await this.movieRepository.findOne({ where: { id: id } });
 
     if (!movie) {
-      throw new NotFoundException('Movie not found');
+      throw new NotFoundError('Movie not found');
     }
 
     Object.assign(movie, updateMovieDto);
-    const updatedMovie = await this.movieRepository.save(movie);
-    return new MovieListDto(updatedMovie);
+
+    const newMovie = await this.movieRepository.save(movie);
+
+    return new MovieListDto(newMovie);
   }
 
   async remove(id: string): Promise<void> {
     const movie = await this.movieRepository.findOne({ where: { id: id } });
     if (!movie) {
-      throw new NotFoundException('Movie not found');
+      throw new NotFoundError('Movie not found');
     }
     await this.movieRepository.remove(movie);
   }
