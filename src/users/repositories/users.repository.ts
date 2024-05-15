@@ -6,54 +6,14 @@ import { UserEntity } from '../entities/user.entity';
 import { NotFoundException } from '@nestjs/common';
 
 import { UserListDto } from '../dto/user-list.dto.ts';
+import { EmailIsTakenError } from '../errors';
 
 @Injectable()
 export class UsersRepository {
   constructor(
     @InjectRepository(UserEntity)
     private readonly userRepository: Repository<UserEntity>,
-    // private readonly authService: AuthService,
   ) {}
-
-  // async signUp(signupDto: SignupDto): Promise<AuthenticatedUser> {
-  //   const existingUser = await this.findByEmail(signupDto.email);
-
-  //   if (existingUser) {
-  //     throw new EmailIsTakenError();
-  //   }
-
-  //   const newUser = this.userRepository.create({
-  //     ...signupDto,
-  //     password: await encrypt(signupDto.password),
-  //   });
-
-  //   const savedUser = await this.userRepository.save(newUser);
-
-  //   const accessToken = await this.authService.createAccessToken(savedUser.id);
-
-  //   return {
-  //     id: savedUser.id,
-  //     name: savedUser.name,
-  //     email: savedUser.email,
-  //     accessToken,
-  //   };
-  // }
-
-  // async signIn(signinDto: SigninDto): Promise<AuthenticatedUser> {
-  //   const user = await this.findByEmail(signinDto.email);
-
-  //   if (!user) {
-  //     throw new NotFoundException('User not found');
-  //   }
-
-  //   const match = await user.comparePassword(signinDto.password);
-  //   if (!match) {
-  //     throw new NotFoundException('Invalid credentials');
-  //   }
-  //   const accessToken = await this.authService.createAccessToken(user.id);
-
-  //   return { id: user.id, name: user.name, accessToken, email: user.email };
-  // }
 
   async findAll(): Promise<UserListDto[]> {
     const users = await this.userRepository.find();
@@ -75,11 +35,15 @@ export class UsersRepository {
       throw new NotFoundException('User not found');
     }
 
-    const updatedUser = await this.userRepository.save({
-      ...user,
-      ...updateUserDto,
+    const existingUser = await this.userRepository.findOne({
+      where: { email: updateUserDto.email },
     });
+    if (existingUser && existingUser.id !== id) {
+      throw new EmailIsTakenError();
+    }
 
+    Object.assign(user, updateUserDto);
+    const updatedUser = await this.userRepository.save(user);
     return new UserListDto(updatedUser);
   }
 
@@ -89,13 +53,5 @@ export class UsersRepository {
       throw new NotFoundException('User not found');
     }
     await this.userRepository.remove(user);
-  }
-
-  private async findByEmail(email: string): Promise<UserEntity> {
-    const user = await this.userRepository.findOne({ where: { email } });
-    if (!user) {
-      throw new NotFoundException('Email not found');
-    }
-    return user;
   }
 }

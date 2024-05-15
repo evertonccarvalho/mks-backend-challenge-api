@@ -7,14 +7,6 @@ import { UserListDto } from './dto/user-list.dto.ts';
 export class UsersService {
   constructor(private readonly userRepository: UsersRepository) {}
 
-  // async signIn(signinDto: SigninDto): Promise<AuthenticatedUser> {
-  //   return this.userRepository.signIn(signinDto);
-  // }
-
-  // async signUp(signupDto: SignupDto): Promise<AuthenticatedUser> {
-  //   return this.userRepository.signUp(signupDto);
-  // }
-
   async findAll(): Promise<UserListDto[]> {
     return this.userRepository.findAll();
   }

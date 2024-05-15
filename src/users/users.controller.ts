@@ -1,4 +1,4 @@
-import { Controller, Get, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Body, Param, Delete, Put } from '@nestjs/common';
 import { UsersService } from './users.service';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { ApiForbiddenResponse, ApiResponse, ApiTags } from '@nestjs/swagger';
@@ -7,19 +7,6 @@ import { ApiForbiddenResponse, ApiResponse, ApiTags } from '@nestjs/swagger';
 @Controller('users')
 export class UsersController {
   constructor(private readonly usersService: UsersService) {}
-
-  // @Post('signup')
-  // @HttpCode(HttpStatus.CREATED)
-  // @ApiResponse({ status: 409, description: 'Conflito de email' })
-  // signUp(@Body() signUpDto: SignupDto): Promise<AuthenticatedUser> {
-  //   return this.usersService.signUp(signUpDto);
-  // }
-
-  // @Post('signin')
-  // @HttpCode(HttpStatus.OK)
-  // signIn(@Body() signInDto: SigninDto): Promise<AuthenticatedUser> {
-  //   return this.usersService.signIn(signInDto);
-  // }
 
   @ApiForbiddenResponse({ description: 'Acesso negado' })
   @Get()
@@ -36,7 +23,7 @@ export class UsersController {
 
   @ApiResponse({ status: 404, description: 'Não encontrado' })
   @ApiForbiddenResponse({ description: 'Acesso negado' })
-  @Patch(':id')
+  @Put(':id')
   update(@Param('id') id: string, @Body() updateUserDto: UpdateUserDto) {
     return this.usersService.update(id, updateUserDto);
   }
