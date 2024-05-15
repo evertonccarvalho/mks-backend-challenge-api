@@ -5,10 +5,10 @@ import {
 } from '@nestjs/common';
 import { sign } from 'jsonwebtoken';
 import { Request } from 'express';
-import { JwtPayload } from './models/jwt-payload.model';
 import { Repository } from 'typeorm';
 import { UserEntity } from '@/users/entities/user.entity';
 import { InjectRepository } from '@nestjs/typeorm';
+import { JwtPayload } from './interfaces';
 @Injectable()
 export class AuthService {
   constructor(
