@@ -1,6 +1,19 @@
 version: '3.1'
 
 services:
+  app:
+    build: .
+    entrypoint: .docker/entrypoint.sh
+    container_name: mks-api
+    ports:
+      - '3000:3000'
+    volumes:
+      - .:/home/node/app
+    depends_on:
+      - db
+    links:
+      - redis
+
   db:
     build: .
     container_name: mksdb-db
@@ -8,7 +21,7 @@ services:
     ports:
       - '5432:5432'
     volumes:
-      - .docker/dbdata:/var/lib/postgresql/dbdata
+      - .docker/dbdata:/var/lib/postgresql/data
     environment:
       - POSTGRES_PASSWORD=docker
       - POSTGRES_DB=mksdb
@@ -22,3 +35,15 @@ services:
     environment:
       - POSTGRES_PASSWORD=docker
       - POSTGRES_DB=mksdb
+
+  redis:
+    container_name: cache
+    image: redis
+    ports:
+      - 6380:6380
+    volumes:
+      - redis:/data
+
+volumes:
+  redis:
+    driver: local
