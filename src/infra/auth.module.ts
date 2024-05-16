@@ -7,6 +7,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { UserEntity } from '@/infra/entities/user.entity';
 import { AuthRepository } from './repositories/auth.repository';
 import { AuthController } from './http/auth/auth.controller';
+import { BcryptjsHashProvider } from './services/bcrypt/bcryptjs-hash.provider';
 @Module({
   imports: [
     TypeOrmModule.forFeature([UserEntity]),
@@ -17,7 +18,13 @@ import { AuthController } from './http/auth/auth.controller';
     }),
   ],
   controllers: [AuthController],
-  providers: [AuthService, AuthRepository, JwtStrategy, JwtService],
+  providers: [
+    AuthService,
+    BcryptjsHashProvider,
+    AuthRepository,
+    JwtStrategy,
+    JwtService,
+  ],
   exports: [AuthService],
 })
 export class AuthModule {}

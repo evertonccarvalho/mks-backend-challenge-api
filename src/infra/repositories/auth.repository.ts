@@ -1,36 +1,41 @@
-import { Injectable, UnauthorizedException } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import { NotFoundException } from '@nestjs/common';
 import { SigninDto } from '../http/auth/dto/sign-in.dto';
 import { SignupDto } from '@/infra/http/auth/dto/sign-up.dto';
-import { encrypt } from '@/helpers/encrypter/encrypter';
 import { AuthenticatedUser } from '@/helpers/interfaces';
 import { UserEntity } from '@/infra/entities/user.entity';
-import { EmailIsTakenError } from '@/helpers/errors';
+import { EmailIsTakenError, UserNotFoundError } from '@/helpers/errors';
 import { JwtService } from '@nestjs/jwt';
 import { JwtPayload } from 'jsonwebtoken';
+import { BcryptjsHashProvider } from '../services/bcrypt/bcryptjs-hash.provider';
+import { PasswordDoesntMatchError } from '@/helpers/errors/password-not-match.error';
 
 @Injectable()
 export class AuthRepository {
   constructor(
     @InjectRepository(UserEntity)
     private readonly userRepository: Repository<UserEntity>,
+    private readonly hashProvider: BcryptjsHashProvider,
     private readonly jwtService: JwtService,
   ) {}
 
   async signUp(signupDto: SignupDto): Promise<AuthenticatedUser> {
-    const existingUser = await this.userRepository.findOne({
+    const entity = await this.userRepository.findOne({
       where: { email: signupDto.email },
     });
 
-    if (existingUser) {
+    if (entity) {
       throw new EmailIsTakenError();
     }
 
+    const hashPassword = await this.hashProvider.generateHash(
+      signupDto.password,
+    );
+
     const newUser = this.userRepository.create({
       ...signupDto,
-      password: await encrypt(signupDto.password),
+      password: hashPassword,
     });
 
     const savedUser = await this.userRepository.save(newUser);
@@ -46,19 +51,31 @@ export class AuthRepository {
   }
 
   async signIn(signinDto: SigninDto): Promise<AuthenticatedUser> {
-    const user = await this.findByEmail(signinDto.email);
+    const entity = await this.userRepository.findOne({
+      where: { email: signinDto.email },
+    });
 
-    if (!user) {
-      throw new NotFoundException('User not found');
+    if (!entity) {
+      throw new UserNotFoundError();
     }
 
-    const match = await user.comparePassword(signinDto.password);
-    if (!match) {
-      throw new NotFoundException('Invalid credentials');
-    }
-    const accessToken = await this.createAccessToken(user.id);
+    const hashPasswordMatches = await this.hashProvider.compareHash(
+      signinDto.password,
+      entity.password,
+    );
 
-    return { id: user.id, name: user.name, accessToken, email: user.email };
+    if (!hashPasswordMatches) {
+      throw new PasswordDoesntMatchError();
+    }
+
+    const accessToken = await this.createAccessToken(entity.id);
+
+    return {
+      id: entity.id,
+      name: entity.name,
+      accessToken,
+      email: entity.email,
+    };
   }
 
   async createAccessToken(userId: string): Promise<string> {
@@ -74,15 +91,7 @@ export class AuthRepository {
     });
 
     if (!user) {
-      throw new UnauthorizedException('User not found.');
-    }
-    return user;
-  }
-
-  private async findByEmail(email: string): Promise<UserEntity> {
-    const user = await this.userRepository.findOne({ where: { email } });
-    if (!user) {
-      throw new NotFoundException('Email not found');
+      throw new UserNotFoundError();
     }
     return user;
   }

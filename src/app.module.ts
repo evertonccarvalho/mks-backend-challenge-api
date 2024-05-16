@@ -26,6 +26,7 @@ import { MoviesModule } from './infra/movies.module';
     TypeOrmDatabaseModule,
     UsersModule,
     MoviesModule,
+
     // AuthModule,
     // DomainModule,
   ],
