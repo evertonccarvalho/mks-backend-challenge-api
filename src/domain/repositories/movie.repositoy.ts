@@ -1,5 +1,5 @@
 import { Movie } from '@/domain/model/movie';
-import { UpdateMovieDto } from '@/infra/http/dto';
+import { UpdateMovieDto } from '@/infra/http/movie/dto';
 
 export abstract class MovieRepository {
   abstract findMany(): Promise<Movie[]>;

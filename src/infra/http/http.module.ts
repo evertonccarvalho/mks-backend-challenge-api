@@ -1,8 +1,7 @@
 import { Module } from '@nestjs/common';
-import { MoviesController } from './movies.controller';
+import { MoviesController } from './movie/movies.controller';
 import { GetMoviesUseCase } from '@/domain/use-case/get-movies';
 import { CreateMovieUseCase } from '@/domain/use-case/create-movie';
-import { AppController } from './app.controller';
 import { DatabaseModule } from '../persistence/typeorm/typeorm.module';
 import { AuthModule } from '@/auth/auth.module';
 import { DeleteMovieUseCase } from '@/domain/use-case/delete-movie';
@@ -11,7 +10,7 @@ import { UpdateMovieUseCase } from '@/domain/use-case/update-movie';
 
 @Module({
   imports: [DatabaseModule, AuthModule],
-  controllers: [AppController, MoviesController],
+  controllers: [MoviesController],
   providers: [
     CreateMovieUseCase,
     GetMovieUseCase,
