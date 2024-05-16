@@ -5,14 +5,13 @@ import { CacheModule } from '@nestjs/cache-manager';
 import { redisStore } from 'cache-manager-ioredis-yet';
 import { APP_GUARD } from '@nestjs/core';
 import { JwtAuthGuard } from './auth/jwt-auth.guard';
-import { DomainModule } from './domain/domain.module';
-import { DatabaseModule } from './infra/persistence/typeorm/typeorm.module';
+// import { DomainModule } from './domain/domain.module';
+import { TypeOrmDatabaseModule } from './infra/config/typeorm/typeorm.module';
+import { UsersModule } from './users/users.module';
+import { MoviesModule } from './infra/movies.module';
 @Module({
   imports: [
     ConfigModule.forRoot({ isGlobal: true }),
-    DatabaseModule,
-    // UsersModule,
-    // AuthModule,
     CacheModule.register({
       isGlobal: true,
       useFactory: async () => {
@@ -24,7 +23,11 @@ import { DatabaseModule } from './infra/persistence/typeorm/typeorm.module';
         return { store };
       },
     }),
-    DomainModule,
+    TypeOrmDatabaseModule,
+    UsersModule,
+    MoviesModule,
+    // AuthModule,
+    // DomainModule,
   ],
   controllers: [],
   providers: [
