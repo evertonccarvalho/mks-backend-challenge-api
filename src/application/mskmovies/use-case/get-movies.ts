@@ -9,8 +9,6 @@ export class GetMoviesUseCase {
   constructor(private movieRepository: MovieRepository) {}
 
   async execute({}: GetMovieUseCaseCommand): Promise<Movie[]> {
-    const response = await this.movieRepository.findMany();
-
-    return response;
+    return await this.movieRepository.findMany();
   }
 }
