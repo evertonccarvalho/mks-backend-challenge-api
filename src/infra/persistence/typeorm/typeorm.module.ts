@@ -17,20 +17,19 @@ import { TyperOrmMoviesRepository } from './repositories/typeorm-movies.reposito
           username: configSerice.get('DB_USER'),
           password: configSerice.get('DB_PASS'),
           database: configSerice.get('DB_NAME'),
-          q: [UserEntity, MovieEntity],
+          entities: [MovieEntity],
           synchronize: true,
         };
       },
       inject: [ConfigService],
     }),
   ],
-  providers: [
-    {
-      provide: MovieRepository,
-      useClass: TyperOrmMoviesRepository,
-    },
-    TyperOrmMoviesRepository, // Adicione aqui
-  ],
-  exports: [MovieRepository, TyperOrmMoviesRepository],
+  // providers: [
+  //   {
+  //     provide: MovieRepository,
+  //     useClass: TyperOrmMoviesRepository,
+  //   },
+  // ],
+  // exports: [MovieRepository],
 })
 export class DatabaseModule {}

@@ -7,11 +7,11 @@ import { GetMoviesUseCase } from '@/application/mskmovies/use-case/get-movies';
 
 @ApiTags('Movies')
 @ApiBearerAuth()
-@Controller('movies  ')
+@Controller('movies')
 export class MoviesController {
   constructor(
-    private createMovieUseCase: CreateMovieUseCase,
     private getMoviesUseCase: GetMoviesUseCase,
+    private createMovieUseCase: CreateMovieUseCase,
   ) {}
 
   @ApiForbiddenResponse({ description: 'Acesso negado' })

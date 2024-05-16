@@ -1,23 +1,19 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
-import { UsersModule } from './users/users.module';
-import { AuthModule } from './auth/auth.module';
 // import { MoviesModule } from './movies/movies.module';
 import { CacheModule } from '@nestjs/cache-manager';
 import { redisStore } from 'cache-manager-ioredis-yet';
 import { APP_GUARD } from '@nestjs/core';
 import { JwtAuthGuard } from './auth/jwt-auth.guard';
 import { MksmoviesModule } from './application/mskmovies/mksmovies.module';
-import { DatabaseModule } from './infra/persistence/typeorm/database.module';
-import { MoviesModule } from './movies/movies.module';
+import { TypeOrmModule } from '@nestjs/typeorm';
 @Module({
   imports: [
     ConfigModule.forRoot({ isGlobal: true }),
-    DatabaseModule,
-    UsersModule,
-    AuthModule,
-    MoviesModule,
-    MksmoviesModule,
+    // DatabaseModule,
+    // UsersModule,
+    // AuthModule,
+    TypeOrmModule,
     CacheModule.register({
       isGlobal: true,
       useFactory: async () => {
@@ -29,6 +25,7 @@ import { MoviesModule } from './movies/movies.module';
         return { store };
       },
     }),
+    MksmoviesModule,
   ],
   controllers: [],
   providers: [
