@@ -1,5 +1,5 @@
 import { CreateMovieUseCaseCommand } from '../use-case/movie/create-movie';
-export class MovieM {
+export class MovieModel {
   id: string;
   title: string;
   synopsis: string;

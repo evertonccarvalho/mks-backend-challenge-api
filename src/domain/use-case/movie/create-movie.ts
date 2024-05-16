@@ -1,4 +1,4 @@
-import { MovieM } from '@/domain/model/movie';
+import { MovieModel } from '@/domain/model/movie';
 import { Injectable } from '@nestjs/common';
 import { MovieRepository } from '../../repositories/movie.repositoy';
 
@@ -13,8 +13,8 @@ export interface CreateMovieUseCaseCommand {
 export class CreateMovieUseCase {
   constructor(private readonly movieRepository: MovieRepository) {}
 
-  async execute(input: CreateMovieUseCaseCommand): Promise<MovieM> {
-    const movie = new MovieM(input);
+  async execute(input: CreateMovieUseCaseCommand): Promise<MovieModel> {
+    const movie = new MovieModel(input);
     return await this.movieRepository.create(movie);
   }
 }

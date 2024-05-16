@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { MovieEntity } from '../entities/movie.entity';
-import { MovieM } from '@/domain/model/movie';
+import { MovieModel } from '@/domain/model/movie';
 // import { TypeOrmMovieMapper } from '../mapper/typeorm/typeorm-movie-mapper';
 import { MovieRepository } from '@/domain/repositories/movie.repositoy';
 import { MovieListDto } from '../http/movie/dto';
@@ -23,7 +23,7 @@ export class DatabaseMoviesRepository implements MovieRepository {
     await this.movieRepository.remove(entity);
   }
 
-  async findById(id: string): Promise<MovieM> {
+  async findById(id: string): Promise<MovieModel> {
     const entity = await this.movieRepository.findOne({ where: { id: id } });
     if (!entity) {
       throw new UserNotFoundError();
@@ -31,7 +31,7 @@ export class DatabaseMoviesRepository implements MovieRepository {
     return this.toMovie(entity);
   }
 
-  async updateEntity(id: string, movie: MovieListDto): Promise<MovieM> {
+  async updateEntity(id: string, movie: MovieListDto): Promise<MovieModel> {
     const entity = await this.findById(id);
 
     entity.title = movie.title;
@@ -45,20 +45,20 @@ export class DatabaseMoviesRepository implements MovieRepository {
     return this.toMovie(entity);
   }
 
-  async findMany(): Promise<MovieM[]> {
+  async findMany(): Promise<MovieModel[]> {
     const movies = await this.movieRepository.find();
     return movies.map((entity) => this.toMovie(entity));
   }
 
-  async create(movie: MovieM): Promise<MovieM> {
+  async create(movie: MovieModel): Promise<MovieModel> {
     const data = this.toMovie(movie);
     const entity = this.movieRepository.create(data);
     const createdMovie = await this.movieRepository.save(entity);
     return this.toMovie(createdMovie);
   }
 
-  private toMovie(entity: MovieM): MovieM {
-    const movie: MovieM = new MovieM(entity);
+  private toMovie(entity: MovieModel): MovieModel {
+    const movie: MovieModel = new MovieModel(entity);
 
     movie.id = entity.id;
     movie.director = entity.director;

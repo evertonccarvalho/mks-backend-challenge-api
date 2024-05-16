@@ -1,7 +1,7 @@
 import { Module } from '@nestjs/common';
 import { AuthModule } from '@/infra/auth.module';
 import { MoviesController } from './http/movie/movies.controller';
-import { DatabaseMoviesRepository } from './repositories/database-movies.repository'; // Importe o repositório específico para filmes
+import { DatabaseMoviesRepository } from './repositories/database-movies.repository';
 import { GetMovieUseCase } from '@/domain/use-case/movie/get-movie';
 import { GetMoviesUseCase } from '@/domain/use-case/movie/get-movies';
 import { UpdateMovieUseCase } from '@/domain/use-case/movie/update-movie';
