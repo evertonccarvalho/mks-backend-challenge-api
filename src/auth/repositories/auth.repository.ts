@@ -7,7 +7,7 @@ import { SignupDto } from '@/auth/dtos/sign-up.dto';
 import { encrypt } from '@/helpers/encrypter/encrypter';
 import { AuthenticatedUser } from '@/auth/interfaces';
 import { UserEntity } from '@/users/entities/user.entity';
-import { EmailIsTakenError } from '@/users/errors';
+import { EmailIsTakenError } from '@/helpers/errors';
 import { JwtService } from '@nestjs/jwt';
 import { JwtPayload } from 'jsonwebtoken';
 

@@ -3,8 +3,8 @@ import { MovieEntity } from '@/infra/persistence/typeorm/entities/movie.entity';
 import { Module } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { TypeOrmMoviesRepository } from './repositories/typeorm-movies.repository';
 import { UserEntity } from '@/users/entities/user.entity';
+import { TypeOrmMoviesRepository } from './repositories/typeorm-movies.repository';
 
 @Module({
   imports: [

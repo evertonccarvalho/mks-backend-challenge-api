@@ -3,7 +3,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { UserEntity } from '../entities/user.entity';
 import { NotFoundException } from '@nestjs/common';
-import { EmailIsTakenError } from '../errors';
+import { EmailIsTakenError } from '../../helpers/errors';
 import { ListUsersDto, UpdateUserDto } from '../dto';
 
 @Injectable()
