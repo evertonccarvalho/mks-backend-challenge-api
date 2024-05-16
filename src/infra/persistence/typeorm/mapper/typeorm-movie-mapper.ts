@@ -1,4 +1,4 @@
-import { Movie } from '@/domain/mskmovies/movie';
+import { Movie } from '@/domain/model/movie';
 import { MovieEntity } from '../entities/movie.entity';
 import { NotFoundException } from '@nestjs/common';
 

@@ -1,4 +1,4 @@
-import { MovieRepository } from '@/application/mskmovies/ports/movie.repositoy';
+import { MovieRepository } from '@/domain/repositories/movie.repositoy';
 import { MovieEntity } from '@/infra/persistence/typeorm/entities/movie.entity';
 import { Module } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';

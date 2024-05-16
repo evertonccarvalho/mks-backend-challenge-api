@@ -1,13 +1,13 @@
 import { Module } from '@nestjs/common';
 import { MoviesController } from './movies.controller';
-import { GetMoviesUseCase } from '@/application/mskmovies/use-case/get-movies';
-import { CreateMovieUseCase } from '@/application/mskmovies/use-case/create-movie';
+import { GetMoviesUseCase } from '@/domain/use-case/get-movies';
+import { CreateMovieUseCase } from '@/domain/use-case/create-movie';
 import { AppController } from './app.controller';
 import { DatabaseModule } from '../persistence/typeorm/typeorm.module';
 import { AuthModule } from '@/auth/auth.module';
-import { DeleteMovieUseCase } from '@/application/mskmovies/use-case/delete-movie';
-import { GetMovieUseCase } from '@/application/mskmovies/use-case/get-movie';
-import { UpdateMovieUseCase } from '@/application/mskmovies/use-case/update-movie';
+import { DeleteMovieUseCase } from '@/domain/use-case/delete-movie';
+import { GetMovieUseCase } from '@/domain/use-case/get-movie';
+import { UpdateMovieUseCase } from '@/domain/use-case/update-movie';
 
 @Module({
   imports: [DatabaseModule, AuthModule],

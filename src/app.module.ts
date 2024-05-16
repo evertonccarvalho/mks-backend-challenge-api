@@ -5,7 +5,7 @@ import { CacheModule } from '@nestjs/cache-manager';
 import { redisStore } from 'cache-manager-ioredis-yet';
 import { APP_GUARD } from '@nestjs/core';
 import { JwtAuthGuard } from './auth/jwt-auth.guard';
-import { MksmoviesModule } from './application/mskmovies/mksmovies.module';
+import { DomainModule } from './domain/domain.module';
 import { DatabaseModule } from './infra/persistence/typeorm/typeorm.module';
 @Module({
   imports: [
@@ -24,7 +24,7 @@ import { DatabaseModule } from './infra/persistence/typeorm/typeorm.module';
         return { store };
       },
     }),
-    MksmoviesModule,
+    DomainModule,
   ],
   controllers: [],
   providers: [

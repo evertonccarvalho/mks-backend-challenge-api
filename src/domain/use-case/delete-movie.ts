@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { MovieRepository } from '../ports/movie.repositoy';
+import { MovieRepository } from '../repositories/movie.repositoy';
 
 @Injectable()
 export class DeleteMovieUseCase {

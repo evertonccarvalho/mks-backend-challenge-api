@@ -1,6 +1,6 @@
-import { Movie } from '@/domain/mskmovies/movie';
+import { Movie } from '@/domain/model/movie';
 import { Injectable } from '@nestjs/common';
-import { MovieRepository } from '../ports/movie.repositoy';
+import { MovieRepository } from '../repositories/movie.repositoy';
 
 interface CreateMovieUseCaseCommand {
   title: string;

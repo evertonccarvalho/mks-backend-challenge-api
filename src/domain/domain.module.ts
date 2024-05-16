@@ -6,4 +6,4 @@ import { Module } from '@nestjs/common';
   controllers: [],
   providers: [],
 })
-export class MksmoviesModule {}
+export class DomainModule {}
