@@ -15,12 +15,12 @@ import {
   ApiTags,
 } from '@nestjs/swagger';
 import { CacheInterceptor, CacheKey } from '@nestjs/cache-manager';
-import { CreateMovieUseCase } from '@/domain/use-case/create-movie';
+import { CreateMovieUseCase } from '@/domain/use-case/movie/create-movie';
 import { CreateMovieDto, UpdateMovieDto } from './dto';
-import { GetMoviesUseCase } from '@/domain/use-case/get-movies';
-import { DeleteMovieUseCase } from '@/domain/use-case/delete-movie';
-import { GetMovieUseCase } from '@/domain/use-case/get-movie';
-import { UpdateMovieUseCase } from '@/domain/use-case/update-movie';
+import { GetMoviesUseCase } from '@/domain/use-case/movie/get-movies';
+import { DeleteMovieUseCase } from '@/domain/use-case/movie/delete-movie';
+import { GetMovieUseCase } from '@/domain/use-case/movie/get-movie';
+import { UpdateMovieUseCase } from '@/domain/use-case/movie/update-movie';
 
 @ApiTags('Movies')
 @ApiBearerAuth()

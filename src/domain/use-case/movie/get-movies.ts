@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { Movie } from '@/domain/model/movie';
-import { MovieRepository } from '../repositories/movie.repositoy';
+import { MovieRepository } from '../../repositories/movie.repositoy';
 
 interface GetMovieUseCaseCommand {}
 

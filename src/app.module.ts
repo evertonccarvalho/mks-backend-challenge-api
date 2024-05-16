@@ -4,7 +4,7 @@ import { ConfigModule } from '@nestjs/config';
 import { CacheModule } from '@nestjs/cache-manager';
 import { redisStore } from 'cache-manager-ioredis-yet';
 import { APP_GUARD } from '@nestjs/core';
-import { JwtAuthGuard } from './auth/jwt-auth.guard';
+import { JwtAuthGuard } from './infra/common/guards/jwt-auth.guard';
 // import { DomainModule } from './domain/domain.module';
 import { TypeOrmDatabaseModule } from './infra/config/typeorm/typeorm.module';
 import { UsersModule } from './users/users.module';
