@@ -6,7 +6,7 @@ interface GetMovieUseCaseCommand {}
 
 @Injectable()
 export class GetMoviesUseCase {
-  constructor(private movieRepository: MovieRepository) {}
+  constructor(private readonly movieRepository: MovieRepository) {}
 
   async execute({}: GetMovieUseCaseCommand): Promise<Movie[]> {
     return await this.movieRepository.findMany();

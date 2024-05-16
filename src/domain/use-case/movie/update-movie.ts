@@ -12,10 +12,9 @@ interface UpdateMovieUseCaseRequest {
 
 @Injectable()
 export class UpdateMovieUseCase {
-  constructor(private movieRepository: MovieRepository) {}
+  constructor(private readonly movieRepository: MovieRepository) {}
 
   async execute(id: string, data: UpdateMovieUseCaseRequest): Promise<Movie> {
-    console.log(data);
-    return await this.movieRepository.update(id, data);
+    return await this.movieRepository.updateEntity(id, data);
   }
 }

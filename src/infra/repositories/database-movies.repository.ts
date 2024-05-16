@@ -24,7 +24,7 @@ export class DatabaseMoviesRepository implements MovieRepository {
     return TypeOrmMovieMapper.toDomain(entity);
   }
 
-  async update(id: string, movie: Movie): Promise<Movie> {
+  async updateEntity(id: string, movie: Movie): Promise<Movie> {
     const preparedData = TypeOrmMovieMapper.toTypeOrm(movie);
     const updatedEntity = await this.movieRepository.preload({
       ...preparedData,

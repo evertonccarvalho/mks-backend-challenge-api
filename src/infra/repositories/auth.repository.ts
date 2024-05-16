@@ -3,13 +3,16 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { SigninDto } from '../http/auth/dto/sign-in.dto';
 import { SignupDto } from '@/infra/http/auth/dto/sign-up.dto';
-import { AuthenticatedUser } from '@/helpers/interfaces';
+import { AuthenticatedUser } from '@/domain/adapters';
 import { UserEntity } from '@/infra/entities/user.entity';
-import { EmailIsTakenError, UserNotFoundError } from '@/helpers/errors';
+import {
+  EmailIsTakenError,
+  PasswordDoesntMatchError,
+  UserNotFoundError,
+} from '@/infra/common/errors';
 import { JwtService } from '@nestjs/jwt';
 import { JwtPayload } from 'jsonwebtoken';
-import { BcryptjsHashProvider } from '../services/bcrypt/bcryptjs-hash.provider';
-import { PasswordDoesntMatchError } from '@/helpers/errors/password-not-match.error';
+import { BcryptjsHashProvider } from '../providers/bcrypt/bcryptjs-hash.provider';
 
 @Injectable()
 export class AuthRepository {

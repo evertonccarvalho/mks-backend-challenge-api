@@ -2,7 +2,7 @@ import { Controller, Post, Body, HttpCode, HttpStatus } from '@nestjs/common';
 import { ApiResponse, ApiTags } from '@nestjs/swagger';
 import { SignupDto } from './dto/sign-up.dto';
 import { SigninDto } from './dto/sign-in.dto';
-import { AuthenticatedUser } from '@/helpers/interfaces';
+import { AuthenticatedUser } from '@/domain/adapters';
 import { AuthService } from '../../services/auth.service';
 import { Public } from '../../common/decorators/auth-guard.decorators';
 

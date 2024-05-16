@@ -12,7 +12,7 @@ interface CreateMovieUseCaseCommand {
 
 @Injectable()
 export class CreateMovieUseCase {
-  constructor(private movieRepository: MovieRepository) {}
+  constructor(private readonly movieRepository: MovieRepository) {}
 
   async execute({
     title,

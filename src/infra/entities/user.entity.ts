@@ -1,5 +1,4 @@
 import { Entity, PrimaryGeneratedColumn, Column, BeforeInsert } from 'typeorm';
-import * as bcrypt from 'bcrypt';
 import { v4 as uuidv4 } from 'uuid';
 
 @Entity()
@@ -41,9 +40,5 @@ export class UserEntity {
       return;
     }
     this.id = uuidv4();
-  }
-
-  async comparePassword(password: string): Promise<boolean> {
-    return await bcrypt.compare(password, this.password);
   }
 }

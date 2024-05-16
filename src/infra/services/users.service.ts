@@ -1,10 +1,10 @@
 import { Injectable } from '@nestjs/common';
-import { UsersRepository } from '../repositories/users.repository';
+import { DatabaseUsersRepository } from '../repositories/database-users.repository';
 import { ListUsersDto, UpdateUserDto } from '../http/users/dto';
 
 @Injectable()
 export class UsersService {
-  constructor(private readonly userRepository: UsersRepository) {}
+  constructor(private readonly userRepository: DatabaseUsersRepository) {}
 
   async findAll(): Promise<ListUsersDto[]> {
     return this.userRepository.findAll();

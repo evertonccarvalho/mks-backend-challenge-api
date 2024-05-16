@@ -20,6 +20,7 @@ export class TypeOrmMovieMapper {
 
   static toTypeOrm(movie: Movie) {
     return {
+      id: movie.id,
       director: movie.director,
       title: movie.title,
       duration: movie.duration,
