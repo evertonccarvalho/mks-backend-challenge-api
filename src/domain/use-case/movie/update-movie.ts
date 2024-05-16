@@ -1,4 +1,4 @@
-import { Movie } from '@/domain/model/movie';
+import { MovieM } from '@/domain/model/movie';
 import { Injectable } from '@nestjs/common';
 import { MovieRepository } from '../../repositories/movie.repositoy';
 
@@ -12,9 +12,10 @@ interface UpdateMovieUseCaseRequest {
 
 @Injectable()
 export class UpdateMovieUseCase {
-  constructor(private readonly movieRepository: MovieRepository) {}
+  constructor(private movieRepository: MovieRepository) {}
 
-  async execute(id: string, data: UpdateMovieUseCaseRequest): Promise<Movie> {
-    return await this.movieRepository.updateEntity(id, data);
+  async execute(id: string, data: UpdateMovieUseCaseRequest): Promise<MovieM> {
+    console.log(id);
+    return this.movieRepository.updateEntity(id, data);
   }
 }

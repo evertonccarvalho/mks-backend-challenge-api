@@ -3,7 +3,6 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { UserEntity } from '../entities/user.entity';
 import { NotFoundException } from '@nestjs/common';
-import { EmailIsTakenError } from '../common/errors';
 import { ListUsersDto, UpdateUserDto } from '../http/users/dto';
 
 @Injectable()
@@ -33,13 +32,6 @@ export class DatabaseUsersRepository {
     const user = await this.userRepository.findOne({ where: { id: id } });
     if (!user) {
       throw new NotFoundException('User not found');
-    }
-
-    const existingUser = await this.userRepository.findOne({
-      where: { id: id },
-    });
-    if (existingUser && existingUser.id !== id) {
-      throw new EmailIsTakenError();
     }
 
     Object.assign(user, updateUserDto);

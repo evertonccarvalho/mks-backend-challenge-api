@@ -28,4 +28,26 @@ export class MovieEntity {
     }
     this.id = uuidv4();
   }
+
+  // constructor(partialEntity: Partial<MovieEntity>) {
+  //   Object.assign(this, partialEntity);
+  // }
+
+  // static create({
+  //   director,
+  //   duration,
+  //   id,
+  //   synopsis,
+  //   title,
+  //   year,
+  // }: MovieEntity): MovieEntity {
+  //   return new MovieEntity({
+  //     director,
+  //     duration,
+  //     id,
+  //     synopsis,
+  //     title,
+  //     year,
+  //   });
+  // }
 }

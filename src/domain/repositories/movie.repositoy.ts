@@ -1,10 +1,10 @@
-import { Movie } from '@/domain/model/movie';
+import { MovieM } from '@/domain/model/movie';
 import { UpdateMovieDto } from '@/infra/http/movie/dto';
 
 export abstract class MovieRepository {
-  abstract findMany(): Promise<Movie[]>;
-  abstract findById(id: string): Promise<Movie>;
-  abstract create(data: Movie): Promise<Movie>;
-  abstract updateEntity(id: string, data: UpdateMovieDto): Promise<Movie>;
+  abstract findMany(): Promise<MovieM[]>;
+  abstract findById(id: string): Promise<MovieM>;
+  abstract create(data: MovieM): Promise<MovieM>;
+  abstract updateEntity(id: string, data: UpdateMovieDto): Promise<MovieM>;
   abstract delete(id: string): Promise<void>;
 }
