@@ -6,14 +6,13 @@ import { redisStore } from 'cache-manager-ioredis-yet';
 import { APP_GUARD } from '@nestjs/core';
 import { JwtAuthGuard } from './auth/jwt-auth.guard';
 import { MksmoviesModule } from './application/mskmovies/mksmovies.module';
-import { TypeOrmModule } from '@nestjs/typeorm';
+import { DatabaseModule } from './infra/persistence/typeorm/typeorm.module';
 @Module({
   imports: [
     ConfigModule.forRoot({ isGlobal: true }),
-    // DatabaseModule,
+    DatabaseModule,
     // UsersModule,
     // AuthModule,
-    TypeOrmModule,
     CacheModule.register({
       isGlobal: true,
       useFactory: async () => {

@@ -4,7 +4,7 @@ import { Repository } from 'typeorm';
 import { NotFoundException } from '@nestjs/common';
 import { SigninDto } from '../dtos/sign-in.dto';
 import { SignupDto } from '@/auth/dtos/sign-up.dto';
-import { encrypt } from '@/application/encrypter/encrypter';
+import { encrypt } from '@/helpers/encrypter/encrypter';
 import { AuthenticatedUser } from '@/auth/interfaces';
 import { UserEntity } from '@/users/entities/user.entity';
 import { EmailIsTakenError } from '@/users/errors';

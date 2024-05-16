@@ -4,7 +4,7 @@ import { MovieEntity } from '../entities/movie.entity';
 export class TypeOrmMovieMapper {
   static toDomain(entity: MovieEntity): Movie {
     const model = new Movie({
-      id: entity.id.toString(),
+      id: entity.id,
       director: entity.director,
       title: entity.title,
       duration: entity.duration,

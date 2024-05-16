@@ -1,10 +1,10 @@
 import { MovieRepository } from '@/application/mskmovies/ports/movie.repositoy';
 import { MovieEntity } from '@/infra/persistence/typeorm/entities/movie.entity';
-import { UserEntity } from '@/users/entities/user.entity';
 import { Module } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { TyperOrmMoviesRepository } from './repositories/typeorm-movies.repository';
+import { UserEntity } from '@/users/entities/user.entity';
 
 @Module({
   imports: [
@@ -17,19 +17,22 @@ import { TyperOrmMoviesRepository } from './repositories/typeorm-movies.reposito
           username: configSerice.get('DB_USER'),
           password: configSerice.get('DB_PASS'),
           database: configSerice.get('DB_NAME'),
-          entities: [MovieEntity],
+          entities: [MovieEntity, UserEntity],
           synchronize: true,
         };
       },
+
       inject: [ConfigService],
     }),
+    TypeOrmModule.forFeature([MovieEntity]), // Adicione este trecho para disponibilizar os repositórios
   ],
-  // providers: [
-  //   {
-  //     provide: MovieRepository,
-  //     useClass: TyperOrmMoviesRepository,
-  //   },
-  // ],
-  // exports: [MovieRepository],
+
+  providers: [
+    {
+      provide: MovieRepository,
+      useClass: TyperOrmMoviesRepository,
+    },
+  ],
+  exports: [MovieRepository],
 })
 export class DatabaseModule {}

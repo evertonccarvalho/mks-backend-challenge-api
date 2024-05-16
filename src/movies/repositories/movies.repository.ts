@@ -5,7 +5,7 @@ import { MovieEntity } from '../../infra/persistence/typeorm/entities/movie.enti
 import { MovieListDto } from '../../infra/http/dto/list-movies.dto';
 import { UpdateMovieDto } from '../../infra/http/dto/update-movie.dto';
 import { CreateMovieDto } from '../../infra/http/dto/create-movie.dto';
-import { NotFoundError } from '@/application/errors/not-found-error';
+import { NotFoundError } from '@/helpers/errors/not-found-error';
 
 @Injectable()
 export class MoviesRepositoryMVC {
