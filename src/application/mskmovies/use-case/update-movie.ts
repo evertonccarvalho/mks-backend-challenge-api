@@ -3,7 +3,6 @@ import { Injectable } from '@nestjs/common';
 import { MovieRepository } from '../ports/movie.repositoy';
 
 interface UpdateMovieUseCaseRequest {
-  id: string;
   title?: string;
   synopsis?: string;
   duration?: number;
@@ -15,23 +14,8 @@ interface UpdateMovieUseCaseRequest {
 export class UpdateMovieUseCase {
   constructor(private movieRepository: MovieRepository) {}
 
-  async execute({
-    id,
-    title,
-    director,
-    duration,
-    synopsis,
-    year,
-  }: UpdateMovieUseCaseRequest): Promise<Movie> {
-    const movie = new Movie({
-      title,
-      director,
-      duration,
-      synopsis,
-      year,
-    });
-    const response = await this.movieRepository.update(id, movie);
-
-    return response;
+  async execute(id: string, data: UpdateMovieUseCaseRequest): Promise<Movie> {
+    console.log(data);
+    return await this.movieRepository.update(id, data);
   }
 }

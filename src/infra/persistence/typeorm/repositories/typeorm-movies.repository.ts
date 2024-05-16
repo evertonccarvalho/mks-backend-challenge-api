@@ -24,17 +24,13 @@ export class TypeOrmMoviesRepository implements MovieRepository {
     return TypeOrmMovieMapper.toDomain(entity);
   }
 
-  async update(id: string, data: Movie): Promise<Movie> {
-    const movieToUpdate = await this.movieRepository.findOne({
-      where: { id: id },
+  async update(id: string, movie: Movie): Promise<Movie> {
+    const preparedData = TypeOrmMovieMapper.toTypeOrm(movie);
+    const updatedEntity = await this.movieRepository.preload({
+      ...preparedData,
+      id,
     });
-
-    movieToUpdate.title = data.title;
-    movieToUpdate.director = data.director;
-    movieToUpdate.year = data.year;
-
-    const updatedMovie = await this.movieRepository.save(movieToUpdate);
-    return TypeOrmMovieMapper.toDomain(updatedMovie);
+    return TypeOrmMovieMapper.toDomain(updatedEntity);
   }
 
   async findMany(): Promise<Movie[]> {

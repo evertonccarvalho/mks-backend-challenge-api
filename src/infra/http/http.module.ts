@@ -7,6 +7,7 @@ import { DatabaseModule } from '../persistence/typeorm/typeorm.module';
 import { AuthModule } from '@/auth/auth.module';
 import { DeleteMovieUseCase } from '@/application/mskmovies/use-case/delete-movie';
 import { GetMovieUseCase } from '@/application/mskmovies/use-case/get-movie';
+import { UpdateMovieUseCase } from '@/application/mskmovies/use-case/update-movie';
 
 @Module({
   imports: [DatabaseModule, AuthModule],
@@ -16,6 +17,7 @@ import { GetMovieUseCase } from '@/application/mskmovies/use-case/get-movie';
     GetMovieUseCase,
     GetMoviesUseCase,
     DeleteMovieUseCase,
+    UpdateMovieUseCase,
   ],
   exports: [],
 })
