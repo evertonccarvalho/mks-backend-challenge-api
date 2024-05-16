@@ -1,9 +1,9 @@
 import { Injectable } from '@nestjs/common';
 
-import { AuthenticatedUser, JwtPayload } from './interfaces';
-import { SigninDto, SignupDto } from '../infra/http/auth/dto';
-import { AuthRepository } from '../users/repositories/auth.repository';
-import { UserEntity } from '@/users/entities/user.entity';
+import { AuthenticatedUser, JwtPayload } from '../../helpers/interfaces';
+import { SigninDto, SignupDto } from '../http/auth/dto';
+import { AuthRepository } from '../repositories/auth.repository';
+import { UserEntity } from '@/infra/entities/user.entity';
 @Injectable()
 export class AuthService {
   constructor(private readonly authRepository: AuthRepository) {}

@@ -7,7 +7,7 @@ import { APP_GUARD } from '@nestjs/core';
 import { JwtAuthGuard } from './infra/common/guards/jwt-auth.guard';
 // import { DomainModule } from './domain/domain.module';
 import { TypeOrmDatabaseModule } from './infra/config/typeorm/typeorm.module';
-import { UsersModule } from './users/users.module';
+import { UsersModule } from './infra/users.module';
 import { MoviesModule } from './infra/movies.module';
 @Module({
   imports: [

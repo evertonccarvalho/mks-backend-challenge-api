@@ -4,7 +4,7 @@ import { Repository } from 'typeorm';
 import { UserEntity } from '../entities/user.entity';
 import { NotFoundException } from '@nestjs/common';
 import { EmailIsTakenError } from '../../helpers/errors';
-import { ListUsersDto, UpdateUserDto } from '../dto';
+import { ListUsersDto, UpdateUserDto } from '../http/users/dto';
 
 @Injectable()
 export class UsersRepository {

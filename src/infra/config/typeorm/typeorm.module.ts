@@ -2,7 +2,7 @@ import { MovieEntity } from '@/infra/entities/movie.entity';
 import { Module } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { TypeOrmModule, TypeOrmModuleOptions } from '@nestjs/typeorm';
-import { UserEntity } from '@/users/entities/user.entity';
+import { UserEntity } from '@/infra/entities/user.entity';
 
 export const getTypeOrmModuleOptions = (
   configSerice: ConfigService,

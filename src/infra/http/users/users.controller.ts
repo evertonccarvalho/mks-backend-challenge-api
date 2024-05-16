@@ -1,6 +1,6 @@
 import { Controller, Get, Body, Param, Delete, Put } from '@nestjs/common';
 import { ApiForbiddenResponse, ApiResponse, ApiTags } from '@nestjs/swagger';
-import { UsersService } from './users.service';
+import { UsersService } from '../../services/users.service';
 import { UpdateUserDto } from './dto/update-user.dto';
 
 @ApiTags('Users')

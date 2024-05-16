@@ -1,6 +1,6 @@
 // user-list.dto.ts
 import { ApiProperty } from '@nestjs/swagger';
-import { UserEntity } from '../entities/user.entity';
+import { UserEntity } from '../../../entities/user.entity';
 
 export class ListUsersDto {
   @ApiProperty({ description: 'Identificador único do usuário' })
