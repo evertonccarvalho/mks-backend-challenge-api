@@ -15,7 +15,6 @@ export class UpdateMovieUseCase {
   constructor(private movieRepository: MovieRepository) {}
 
   async execute(id: string, data: UpdateMovieUseCaseRequest): Promise<MovieM> {
-    console.log(id);
     return this.movieRepository.updateEntity(id, data);
   }
 }

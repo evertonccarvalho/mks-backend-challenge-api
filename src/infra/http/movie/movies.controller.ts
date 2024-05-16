@@ -7,6 +7,7 @@ import {
   Delete,
   Param,
   Put,
+  ParseUUIDPipe,
 } from '@nestjs/common';
 import {
   ApiBearerAuth,
@@ -52,21 +53,24 @@ export class MoviesController {
   @ApiResponse({ status: 404, description: 'Não encontrado' })
   @ApiForbiddenResponse({ description: 'Acesso negado' })
   @Get(':id')
-  findOne(@Param('id') id: string) {
+  findOne(@Param('uuid', new ParseUUIDPipe()) id: string) {
     return this.getMovieUseCase.execute(id);
   }
 
   @ApiResponse({ status: 404, description: 'Não encontrado' })
   @ApiForbiddenResponse({ description: 'Acesso negado' })
   @Delete(':id')
-  remove(@Param('id') id: string) {
+  remove(@Param('uuid', new ParseUUIDPipe()) id: string) {
     return this.deleteMoviesUseCase.execute(id);
   }
 
   @ApiResponse({ status: 404, description: 'Não encontrado' })
   @ApiForbiddenResponse({ description: 'Acesso negado' })
   @Put(':id')
-  update(@Param('id') id: string, @Body() updateMovieDto: UpdateMovieDto) {
+  update(
+    @Param('uuid', new ParseUUIDPipe()) id: string,
+    @Body() updateMovieDto: UpdateMovieDto,
+  ) {
     return this.updateMoviesUseCase.execute(id, updateMovieDto);
   }
 }
