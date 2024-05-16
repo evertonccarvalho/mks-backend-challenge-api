@@ -1,20 +1,17 @@
 import { Module } from '@nestjs/common';
-import { DatabaseModule } from '@/infra/database/database.module';
 import { ConfigModule } from '@nestjs/config';
-import { UsersModule } from './users/users.module';
-import { AuthModule } from './auth/auth.module';
-import { MoviesModule } from './movies/movies.module';
+// import { MoviesModule } from './movies/movies.module';
 import { CacheModule } from '@nestjs/cache-manager';
 import { redisStore } from 'cache-manager-ioredis-yet';
 import { APP_GUARD } from '@nestjs/core';
-import { JwtAuthGuard } from './auth/jwt-auth.guard';
+import { JwtAuthGuard } from './infra/common/guards/jwt-auth.guard';
+// import { DomainModule } from './domain/domain.module';
+import { TypeOrmDatabaseModule } from './infra/config/typeorm/typeorm.module';
+import { UsersModule } from './infra/users.module';
+import { MoviesModule } from './infra/movies.module';
 @Module({
   imports: [
     ConfigModule.forRoot({ isGlobal: true }),
-    DatabaseModule,
-    UsersModule,
-    AuthModule,
-    MoviesModule,
     CacheModule.register({
       isGlobal: true,
       useFactory: async () => {
@@ -26,6 +23,9 @@ import { JwtAuthGuard } from './auth/jwt-auth.guard';
         return { store };
       },
     }),
+    TypeOrmDatabaseModule,
+    UsersModule,
+    MoviesModule,
   ],
   controllers: [],
   providers: [
