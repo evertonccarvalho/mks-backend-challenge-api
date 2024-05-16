@@ -1,5 +1,5 @@
 import { Movie } from '@/domain/model/movie';
-import { MovieEntity } from '../entities/movie.entity';
+import { MovieEntity } from '../../../entities/movie.entity';
 import { NotFoundException } from '@nestjs/common';
 
 export class TypeOrmMovieMapper {

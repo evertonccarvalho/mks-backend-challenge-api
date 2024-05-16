@@ -1,6 +1,6 @@
 // movie-list.dto.ts
 import { ApiProperty } from '@nestjs/swagger';
-import { MovieEntity } from '../../../persistence/typeorm/entities/movie.entity';
+import { MovieEntity } from '../../../entities/movie.entity';
 
 export class MovieListDto {
   @ApiProperty({ description: 'Identificador único do filme' })

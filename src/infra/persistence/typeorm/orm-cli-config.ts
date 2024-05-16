@@ -1,5 +1,5 @@
 import { DataSource, DataSourceOptions } from 'typeorm';
-import { MovieEntity } from './entities/movie.entity';
+import { MovieEntity } from '../../entities/movie.entity';
 import { UserEntity } from '@/users/entities/user.entity';
 
 export const dataSourceOptions: DataSourceOptions = {

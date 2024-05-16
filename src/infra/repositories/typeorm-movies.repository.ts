@@ -3,11 +3,11 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { MovieEntity } from '../entities/movie.entity';
 import { Movie } from '@/domain/model/movie';
-import { TypeOrmMovieMapper } from '../mapper/typeorm-movie-mapper';
+import { TypeOrmMovieMapper } from '../persistence/typeorm/mapper/typeorm-movie-mapper';
 import { MovieRepository } from '@/domain/repositories/movie.repositoy';
 
 @Injectable()
-export class TypeOrmMoviesRepository implements MovieRepository {
+export class DatabaseMoviesRepository implements MovieRepository {
   constructor(
     @InjectRepository(MovieEntity)
     private readonly movieRepository: Repository<MovieEntity>,

@@ -1,10 +1,10 @@
 import { MovieRepository } from '@/domain/repositories/movie.repositoy';
-import { MovieEntity } from '@/infra/persistence/typeorm/entities/movie.entity';
+import { MovieEntity } from '@/infra/entities/movie.entity';
 import { Module } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { UserEntity } from '@/users/entities/user.entity';
-import { TypeOrmMoviesRepository } from './repositories/typeorm-movies.repository';
+import { DatabaseMoviesRepository } from '../../repositories/typeorm-movies.repository';
 
 @Module({
   imports: [
@@ -30,7 +30,7 @@ import { TypeOrmMoviesRepository } from './repositories/typeorm-movies.repositor
   providers: [
     {
       provide: MovieRepository,
-      useClass: TypeOrmMoviesRepository,
+      useClass: DatabaseMoviesRepository,
     },
   ],
   exports: [MovieRepository],
