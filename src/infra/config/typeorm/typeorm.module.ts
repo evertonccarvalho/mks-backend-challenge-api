@@ -1,3 +1,5 @@
+import { MovieEntity } from '@/infra/entities/movie.entity';
+import { UserEntity } from '@/infra/entities/user.entity';
 import { Module } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { TypeOrmModule, TypeOrmModuleOptions } from '@nestjs/typeorm';
@@ -12,7 +14,7 @@ export const getTypeOrmModuleOptions = (
     username: configSerice.get('DB_USER'),
     password: configSerice.get('DB_PASS'),
     database: configSerice.get('DB_NAME'),
-    entities: [__dirname + './../../**/*.entity{.ts,.js}'],
+    entities: [UserEntity, MovieEntity],
     migrations: ['database/migrations/**/*{.ts,.js}'],
     synchronize: false,
   }) as TypeOrmModuleOptions;
