@@ -83,7 +83,7 @@ You can access the API at localhost:3000 and the documentation at localhost:3000
 
 ## Experience
 
-- TypeScript - 1 months.
+- TypeScript - 1 year.
 - Nest.js - 2 months.
 - TypeORM - 2 months.
 - JWT - 1 year.
