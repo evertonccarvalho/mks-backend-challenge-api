@@ -62,12 +62,13 @@ $ pnpm run test:cov
 
 To run the application with docker, first you need to deactivate postgresql if it's activated, then run the following commands:
 
-```bash
 # to run docker-compose
+
+```bash
 $ docker-compose up -d
 ```
 
-In both cases, if everything goes well, you can access the documentation through: localhost:3000/api/
+You can access the API at localhost:3000 and the documentation at localhost:3000/api.
 
 ## Technologies
 
