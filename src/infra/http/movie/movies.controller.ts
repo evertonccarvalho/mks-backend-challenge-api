@@ -53,14 +53,14 @@ export class MoviesController {
   @ApiResponse({ status: 404, description: 'Não encontrado' })
   @ApiForbiddenResponse({ description: 'Acesso negado' })
   @Get(':id')
-  findOne(@Param('uuid', new ParseUUIDPipe()) id: string) {
+  findOne(@Param('id', new ParseUUIDPipe()) id: string) {
     return this.getMovieUseCase.execute(id);
   }
 
   @ApiResponse({ status: 404, description: 'Não encontrado' })
   @ApiForbiddenResponse({ description: 'Acesso negado' })
   @Delete(':id')
-  remove(@Param('uuid', new ParseUUIDPipe()) id: string) {
+  remove(@Param('id', new ParseUUIDPipe()) id: string) {
     return this.deleteMoviesUseCase.execute(id);
   }
 
@@ -68,7 +68,7 @@ export class MoviesController {
   @ApiForbiddenResponse({ description: 'Acesso negado' })
   @Put(':id')
   update(
-    @Param('uuid', new ParseUUIDPipe()) id: string,
+    @Param('id', new ParseUUIDPipe()) id: string,
     @Body() updateMovieDto: UpdateMovieDto,
   ) {
     return this.updateMoviesUseCase.execute(id, updateMovieDto);

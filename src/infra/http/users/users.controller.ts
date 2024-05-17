@@ -25,7 +25,7 @@ export class UsersController {
   @ApiResponse({ status: 404, description: 'Não encontrado' })
   @ApiForbiddenResponse({ description: 'Acesso negado' })
   @Get(':id')
-  findOne(@Param('uuid', new ParseUUIDPipe()) id: string) {
+  findOne(@Param('id', new ParseUUIDPipe()) id: string) {
     return this.usersService.findOne(id);
   }
 
@@ -33,7 +33,7 @@ export class UsersController {
   @ApiForbiddenResponse({ description: 'Acesso negado' })
   @Put(':id')
   update(
-    @Param('uuid', new ParseUUIDPipe()) id: string,
+    @Param('id', new ParseUUIDPipe()) id: string,
     @Body() updateUserDto: UpdateUserDto,
   ) {
     return this.usersService.update(id, updateUserDto);
@@ -42,7 +42,7 @@ export class UsersController {
   @ApiResponse({ status: 404, description: 'Não encontrado' })
   @ApiForbiddenResponse({ description: 'Acesso negado' })
   @Delete(':id')
-  remove(@Param('uuid', new ParseUUIDPipe()) id: string) {
+  remove(@Param('id', new ParseUUIDPipe()) id: string) {
     return this.usersService.remove(id);
   }
 }
