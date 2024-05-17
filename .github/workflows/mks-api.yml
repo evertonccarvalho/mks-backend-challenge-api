@@ -1,0 +1,25 @@
+name: 'API Auth'
+
+on: pull_request
+
+jobs:
+  api-auth:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [20.x]
+
+    steps:
+      - name: Checkout for the main branch
+        uses: actions/checkout@v3
+
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+      - name: run install, build and test
+        run: |
+          npm install
+          npm run build
+          npm run test
