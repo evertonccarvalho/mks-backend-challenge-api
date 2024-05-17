@@ -2,7 +2,6 @@
 /dist
 /node_modules
 /build
-.docker/dbdata
 
 # Logs
 logs
@@ -55,3 +54,8 @@ pids
 
 # Diagnostic reports (https://nodejs.org/api/report.html)
 report.[0-9]*.[0-9]*.[0-9]*.[0-9]*.json
+
+# Docker
+.docker/*
+!.docker/entrypoint.sh
+!.docker/postgres/Dockerfile

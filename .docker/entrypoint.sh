@@ -1,5 +1,5 @@
 #!/bin/bash
 npm install
 npm run build
-npm run start:prod
-
+npx typeorm migration:run
+npm run start:dev

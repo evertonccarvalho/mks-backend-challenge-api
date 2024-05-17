@@ -1,6 +1,5 @@
+import 'dotenv/config';
 import { DataSource, DataSourceOptions } from 'typeorm';
-import { MovieEntity } from '../../entities/movie.entity';
-import { UserEntity } from '@/infra/entities/user.entity';
 
 export const dataSourceOptions: DataSourceOptions = {
   type: 'postgres',
@@ -9,12 +8,11 @@ export const dataSourceOptions: DataSourceOptions = {
   username: process.env.DB_USER,
   password: process.env.DB_PASS,
   database: process.env.DB_NAME,
-  entities: [MovieEntity, UserEntity],
-  synchronize: false,
+  entities: [__dirname + './../../**/*.entity{.ts,.js}'],
 };
 
 export const dataSource = new DataSource({
   ...dataSourceOptions,
+  migrations: ['database/migrations/**/*{.ts,.js}'],
   synchronize: false,
-  migrations: [],
 });
