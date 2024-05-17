@@ -1,10 +1,10 @@
-import { CreateMoviesTable1715901651316 } from 'database/migrations/1715901651316-CreateMoviesTable';
-import { CreateUsersTable1715901992571 } from 'database/migrations/1715901992571-CreateUsersTable';
+import { Module } from '@nestjs/common';
+import { TypeOrmModule, TypeOrmModuleOptions } from '@nestjs/typeorm';
 import { MovieEntity } from '@/infra/entities/movie.entity';
 import { UserEntity } from '@/infra/entities/user.entity';
-import { Module } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
-import { TypeOrmModule, TypeOrmModuleOptions } from '@nestjs/typeorm';
+import { CreateMoviesTable1715901651316 } from 'database/migrations/1715901651316-CreateMoviesTable';
+import { CreateUsersTable1715901992571 } from 'database/migrations/1715901992571-CreateUsersTable';
 
 export const getTypeOrmModuleOptions = (
   configSerice: ConfigService,

@@ -68,6 +68,13 @@ To run the application with docker, first you need to deactivate postgresql if i
 $ docker-compose up -d
 ```
 
+# run migrations
+
+```bash
+$ pnpm build
+$ npx typeorm migration:run -d .\dist\infra\config\typeorm\orm-cli-config.js
+```
+
 You can access the API at localhost:3000 and the documentation at localhost:3000/api.
 
 ## Technologies
