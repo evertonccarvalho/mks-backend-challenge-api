@@ -15,9 +15,10 @@ services:
   #     - redis
 
   db:
-    build: .
+    build: .docker/postgres
     container_name: mksdb-db
     restart: always
+    tty: true
     ports:
       - '5432:5432'
     volumes:

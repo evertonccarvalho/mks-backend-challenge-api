@@ -21,7 +21,5 @@
     "forceConsistentCasingInFileNames": false,
     "noFallthroughCasesInSwitch": false,
     "resolveJsonModule": true
-  },
-  "include": ["src", "database"],
-  "exclude": ["node_modules", "build", "dist", ".docker"]
+  }
 }
