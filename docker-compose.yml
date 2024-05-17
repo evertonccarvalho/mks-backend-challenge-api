@@ -3,16 +3,16 @@ version: '3.9'
 services:
   app:
     build: .
-    entrypoint: .docker/entrypoint.sh
     container_name: mks-api
     ports:
       - '3000:3000'
-    volumes:
-      - .:/home/node/app
     depends_on:
-      - db
-    links:
-      - redis
+      db:
+        condition: service_healthy
+    networks:
+      - mksnetwork
+    env_file:
+      - .env.docker
 
   db:
     build: .docker/postgres
@@ -26,6 +26,13 @@ services:
     environment:
       - POSTGRES_PASSWORD=docker
       - POSTGRES_DB=mksdb
+    healthcheck:
+      test: [ "CMD", "pg_isready", "-U", "postgres", "-d", "mksdb" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - mksnetwork
 
   redis:
     container_name: cache
@@ -34,7 +41,13 @@ services:
       - 6380:6380
     volumes:
       - redis:/data
+    networks:
+      - mksnetwork
 
 volumes:
   redis:
     driver: local
+
+networks:
+  mksnetwork:
+    driver: bridge
