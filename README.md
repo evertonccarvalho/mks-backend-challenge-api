@@ -26,7 +26,7 @@
 
 [Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
 
-## Installation
+## Instalation and running the app locally
 
 ```bash
 $ pnpm install
@@ -58,16 +58,35 @@ $ pnpm run test:e2e
 $ pnpm run test:cov
 ```
 
-## Support
+## Running with docker
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+To run the application with docker, first you need to deactivate postgresql if it's activated, then run the following commands:
 
-## Stay in touch
+```bash
+# to run docker-compose
+$ docker-compose up -d
+```
 
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+In both cases, if everything goes well, you can access the documentation through: localhost:3000/api/
 
-## License
+## Technologies
 
-Nest is [MIT licensed](LICENSE).
+- TypeScript
+- Nest.js
+- TypeORM
+- JWT
+- Swagger
+- Docker
+- Redis
+- Postgresql
+
+## Experience
+
+- TypeScript - 1 months.
+- Nest.js - 2 months.
+- TypeORM - 2 months.
+- JWT - 1 year.
+- Swagger - 1 months.
+- Docker - 8 months.
+- Redis - First project.
+- Postgresql - 1 year.
