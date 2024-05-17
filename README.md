@@ -72,7 +72,7 @@ $ docker-compose up -d
 
 ```bash
 $ pnpm build
-$ npx typeorm migration:run -d .\dist\infra\config\typeorm\orm-cli-config.js
+$ pnpm typeorm:migrate
 ```
 
 You can access the API at localhost:3000 and the documentation at localhost:3000/api.
@@ -90,11 +90,18 @@ You can access the API at localhost:3000 and the documentation at localhost:3000
 
 ## Experience
 
+- JavaScript - 18 months.
 - TypeScript - 1 year.
+- NodeJs - 1 year.
+- Postgresql - 1 year.
+- JWT - 1 year.
+- Docker - 8 months.
 - Nest.js - 2 months.
 - TypeORM - 2 months.
-- JWT - 1 year.
+- PrismaORM - 8 months.
 - Swagger - 1 months.
-- Docker - 8 months.
 - Redis - First project.
-- Postgresql - 1 year.
+- NextJS - 1 Year.
+- ReactJS - 14 months.
+- VueJS - 8 months.
+- TailwindCSS - 8 months
