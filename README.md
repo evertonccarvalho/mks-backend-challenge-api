@@ -77,6 +77,14 @@ $ pnpm typeorm:migrate
 
 You can access the API at localhost:3000 and the documentation at localhost:3000/api.
 
+## Deploy
+
+http://54.233.203.106:3000/
+
+## Swagger Documentation
+
+http://54.233.203.106:3000/api
+
 ## Technologies
 
 - TypeScript
